@@ -17,7 +17,7 @@ jobs:
       - name: Scripts
         run: |
           docker build -t app .
-          docker login -u maksim343 -p dckr_pat_sk_vDKJ2QscHfPmqf_DsaRevSi4
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_SECRET }}
           docker tag app maksim343/lab
           docker push maksim343/lab
     
