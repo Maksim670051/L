@@ -23,8 +23,12 @@ jobs:
         with:
           node-version: 12.x
       # Run npm install and build on our code
-      - run: pip install requirements.txt
-      - run: flask run
+      - run: git clone https://github.com/Maksim670051/L.git
+      - run: python –m venv venv
+      - run: cd venv/Scripts && activate && cd ../..
+      - run: pip install -r requirements.txt
+      - run: set FLASK_APP=app.py
+      - run: flask run --reload
       # Deploy to Netlify using our production secrets
       - name: Deploy to netlify
         uses: netlify/actions/cli@master
