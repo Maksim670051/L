@@ -17,11 +17,6 @@ jobs:
       # Get code from repo
       - name: Checkout code
         uses: actions/checkout@v1
-      # Install NodeJS
-      - name: Use Node.js 12.x
-        uses: actions/setup-node@v1
-        with:
-          node-version: 12.x
       # Run npm install and build on our code
       - run: git clone https://github.com/Maksim670051/L.git
       - run: python –m venv venv
@@ -31,10 +26,10 @@ jobs:
       - run: flask run --reload
       # Deploy to Netlify using our production secrets
       - name: Deploy to netlify
-        uses: netlify/actions/cli@master
+        uses: netlify/actions/cli@main
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         with:
-          args: deploy --dir=build --prod
+          args: deploy --prod
           secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
